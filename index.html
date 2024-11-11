@@ -179,10 +179,79 @@
             }]
         };
 
-        new Chart(document.getElementById('competitionDistributionChart'), { /* chart config */ });
-        new Chart(document.getElementById('keywordValueMatrix'), { /* chart config */ });
-        new Chart(document.getElementById('topLowCompKeywords'), { /* chart config */ });
-        new Chart(document.getElementById('totalVolumeByCompetition'), { /* chart config */ });
+        // Initialize each Chart
+        new Chart(document.getElementById('competitionDistributionChart'), {
+            type: 'bar',
+            data: competitionDistributionData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Distribution of Competition Among Keywords'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
+                    y: { title: { display: true, text: 'Number of Keywords' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('keywordValueMatrix'), {
+            type: 'scatter',
+            data: keywordValueMatrixData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Keyword Value Matrix: Monthly Searches vs Competition'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Competition (out of 100)' } },
+                    y: { title: { display: true, text: 'Monthly Searches', beginAtZero: true } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('topLowCompKeywords'), {
+            type: 'bar',
+            data: topLowCompKeywordsData,
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top Low-Competition Keywords by Search Volume'                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Monthly Searches' } },
+                    y: { title: { display: true, text: 'Keywords' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('totalVolumeByCompetition'), {
+            type: 'bar',
+            data: competitionRangeData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Monthly Searches by Competition Range'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Competition Range' } },
+                    y: { title: { display: true, text: 'Total Monthly Searches' } }
+                }
+            }
+        });
     </script>
 </body>
 </html>
+
