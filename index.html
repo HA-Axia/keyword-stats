@@ -4,115 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyword Data Story</title>
-    <!-- Ensure Chart.js library is referenced securely -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* General Page Style */
         body {
             font-family: 'Roboto', sans-serif;
             color: #333;
+            background: linear-gradient(180deg, #f0f4f8, #e2e8f0);
             margin: 0;
             padding: 0;
-            background: linear-gradient(180deg, #f0f4f8, #e2e8f0);
-            transition: background 0.5s ease;
         }
 
-        h1, h2 {
+        h1 {
             text-align: center;
-            font-weight: 700;
-            color: #3A3A3A;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         .chart-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 80%;
-            max-width: 900px;
+            width: 90%;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: #fff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
 
-        .chart-box {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-        }
-
-        .description-box {
-            flex: 1;
-            padding-left: 20px;
+        .description {
+            margin-top: 10px;
             font-size: 14px;
-            color: #333;
+            text-align: center;
+            color: #666;
         }
 
-        /* Set consistent max dimensions for all charts */
         canvas {
-            max-width: 600px;
-            max-height: 400px;
-        }
-
-        /* Specific adjustment for the third chart */
-        #topLowCompKeywords {
-            max-width: 600px;
-            max-height: 600px; /* Allow more height for readability */
+            width: 100% !important;
+            height: auto !important;
         }
     </style>
 </head>
 <body>
     <h1>Keyword Data Story</h1>
 
-    <!-- First Chart and Description -->
-    <div class="chart-container" id="section1">
-        <div class="chart-box">
-            <h2>Distribution of Competition</h2>
-            <canvas id="competitionDistributionChart"></canvas>
-        </div>
-        <div class="description-box">
-            <p>Here, we can see how many of our keywords are 'low competition'. Low competition keywords (bars toward the left of the chart) are terms that people search for, but which companies are not advertising for.</p>
-        </div>
+    <!-- First Chart -->
+    <div class="chart-container">
+        <canvas id="competitionDistributionChart"></canvas>
+        <div class="description">Here, we can see how many of our keywords are 'low competition'. Low competition keywords (bars toward the left of the chart) are terms that people search for, but which companies are not advertising for.</div>
     </div>
 
-    <!-- Second Chart and Description -->
-    <div class="chart-container" id="section2">
-        <div class="chart-box">
-            <h2>Cumulative Monthly Searches vs Competition</h2>
-            <canvas id="keywordValueMatrix"></canvas>
-        </div>
-        <div class="description-box">
-            <p>This chart shows the cumulative search volume for keywords within different competition levels, providing insight into the volume potential of low-competition terms.</p>
-        </div>
+    <!-- Second Chart -->
+    <div class="chart-container">
+        <canvas id="keywordValueMatrix"></canvas>
+        <div class="description">This chart shows the cumulative search volume for keywords within different competition levels, providing insight into the volume potential of low-competition terms.</div>
     </div>
 
-    <!-- Third Chart and Description (Top 20 Keywords) -->
-    <div class="chart-container" id="section3">
-        <div class="chart-box">
-            <h2>Top 20 Low-Competition Keywords by Search Volume</h2>
-            <canvas id="topLowCompKeywords"></canvas>
-        </div>
-        <div class="description-box">
-            <p>Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</p>
-        </div>
+    <!-- Third Chart (Top 20 Keywords) -->
+    <div class="chart-container">
+        <canvas id="topLowCompKeywords"></canvas>
+        <div class="description">Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</div>
     </div>
 
-    <!-- Final Competition Range Chart -->
-    <div class="chart-container" id="section4">
-        <div class="chart-box">
-            <h2>Total Monthly Searches by Competition Range</h2>
-            <canvas id="totalVolumeByCompetition"></canvas>
-        </div>
-        <div class="description-box">
-            <p>This chart shows the total search volume across four competition ranges, allowing us to see where the bulk of search traffic lies.</p>
-        </div>
+    <!-- Final Chart -->
+    <div class="chart-container">
+        <canvas id="totalVolumeByCompetition"></canvas>
+        <div class="description">This chart shows the total search volume across four competition ranges, allowing us to see where the bulk of search traffic lies.</div>
     </div>
 
     <script>
-        // Data for Distribution of Competition
         const competitionDistributionData = {
             labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
             datasets: [{
@@ -124,7 +82,6 @@
             }]
         };
 
-        // Data for Cumulative Monthly Searches by Competition
         const cumulativeSearchData = {
             labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
             datasets: [{
@@ -136,7 +93,6 @@
             }]
         };
 
-        // Data for Top 20 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
                 "retirement home", "retirement community", "audley villages", "over 55 retirement bungalows to rent near me", 
@@ -156,7 +112,6 @@
             }]
         };
 
-        // Data for Total Monthly Searches by Competition Range
         const competitionRangeData = {
             labels: ["0-25", "26-50", "51-75", "76-100"],
             datasets: [{
@@ -167,18 +122,11 @@
             }]
         };
 
-        // Initialize each Chart
         new Chart(document.getElementById('competitionDistributionChart'), {
             type: 'bar',
             data: competitionDistributionData,
             options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Distribution of Competition Among Keywords'
-                    }
-                },
+                plugins: { title: { display: true, text: 'Distribution of Competition Among Keywords' } },
                 scales: {
                     x: { title: { display: true, text: 'Competition Score (out of 100)' } },
                     y: { title: { display: true, text: 'Number of Keywords' } }
@@ -190,12 +138,7 @@
             type: 'bar',
             data: cumulativeSearchData,
             options: {
-                responsive: true,
-                plugins:                    title: {
-                        display: true,
-                        text: 'Cumulative Monthly Searches vs Competition'
-                    }
-                },
+                plugins: { title: { display: true, text: 'Cumulative Monthly Searches vs Competition' } },
                 scales: {
                     x: { title: { display: true, text: 'Competition Score (out of 100)' } },
                     y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
@@ -207,17 +150,8 @@
             type: 'bar',
             data: topLowCompKeywordsData,
             options: {
-                responsive: true,
-                indexAxis: 'y', // Horizontal bars for better readability
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Top 20 Low-Competition Keywords by Search Volume'
-                    },
-                    legend: {
-                        display: false // Hide the legend for this chart
-                    }
-                },
+                indexAxis: 'y',
+                plugins: { title: { display: true, text: 'Top 20 Low-Competition Keywords by Search Volume' } },
                 scales: {
                     x: { title: { display: true, text: 'Monthly Searches' } },
                     y: { title: { display: true, text: 'Keywords' } }
@@ -229,16 +163,7 @@
             type: 'bar',
             data: competitionRangeData,
             options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Total Monthly Searches by Competition Range'
-                    },
-                    legend: {
-                        display: false // Remove the legend key from this chart
-                    }
-                },
+                plugins: { title: { display: true, text: 'Total Monthly Searches by Competition Range' } },
                 scales: {
                     x: { title: { display: true, text: 'Competition Range' } },
                     y: { title: { display: true, text: 'Total Monthly Searches' } }
@@ -248,4 +173,3 @@
     </script>
 </body>
 </html>
-
