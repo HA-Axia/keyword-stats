@@ -58,10 +58,10 @@
         <div class="description">This chart shows the cumulative search volume for keywords within different competition levels, providing insight into the volume potential of low-competition terms.</div>
     </div>
 
-    <!-- Third Chart (Top 20 Keywords) -->
+    <!-- Third Chart (Top 10 Keywords) -->
     <div class="chart-container">
         <canvas id="topLowCompKeywords"></canvas>
-        <div class="description">Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</div>
+        <div class="description">Here, we see a snapshot of the top 10 low-competition keywords - terms that are searched often, but which companies are not advertising for.</div>
     </div>
 
     <!-- Final Chart -->
@@ -97,15 +97,11 @@
             labels: [
                 "retirement home", "retirement community", "audley villages", "over 55 retirement bungalows to rent near me", 
                 "over 55 housing", "retirement housing", "housing over 55 bungalow to rent", "55 and over housing", 
-                "retirement living community", "wixams retirement village", "shenley wood retirement village", 
-                "hagley road retirement village", "longbridge retirement village", "new oscott village", 
-                "luxury nursing home", "wallacea living", "riverstone living", "retirement communities near me", 
-                "senior living communities", "Total"
+                "retirement living community", "wixams retirement village"
             ],
             datasets: [{
                 label: 'Monthly Searches',
-                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 
-                       500, 500, 500, 500, 500, 200000],
+                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000], // Only top 10 keywords
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
@@ -151,7 +147,7 @@
             data: topLowCompKeywordsData,
             options: {
                 indexAxis: 'y',
-                plugins: { title: { display: true, text: 'Top 20 Low-Competition Keywords by Search Volume' } },
+                plugins: { title: { display: true, text: 'Top 10 Low-Competition Keywords by Search Volume' } },
                 scales: {
                     x: { title: { display: true, text: 'Monthly Searches' } },
                     y: { title: { display: true, text: 'Keywords' } }
@@ -163,7 +159,7 @@
             type: 'bar',
             data: competitionRangeData,
             options: {
-                plugins: { title: { display: true, text: 'Total Monthly Searches by Competition Range' } },
+                plugins: { title: { display: true, text: 'Total Monthly Searches by Competition Range' }, legend: { display: false } },
                 scales: {
                     x: { title: { display: true, text: 'Competition Range' } },
                     y: { title: { display: true, text: 'Total Monthly Searches' } }
