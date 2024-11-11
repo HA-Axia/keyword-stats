@@ -24,7 +24,6 @@
             margin-top: 20px;
         }
 
-        /* Smooth transition effect on scroll */
         .chart-container {
             display: flex;
             align-items: center;
@@ -36,9 +35,6 @@
             background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease-in-out;
         }
 
         .chart-box {
@@ -50,17 +46,6 @@
             padding-left: 20px;
             font-size: 14px;
             color: #333;
-        }
-
-        /* Adding scroll animations */
-        .animate-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        /* Background effect on scroll */
-        body.scrolled {
-            background: linear-gradient(180deg, #e2e8f0, #cbd5e1);
         }
     </style>
 </head>
@@ -81,11 +66,11 @@
     <!-- Second Chart and Description -->
     <div class="chart-container" id="section2">
         <div class="chart-box">
-            <h2>Keyword Value Matrix: Monthly Searches vs Competition</h2>
+            <h2>Cumulative Monthly Searches vs Competition</h2>
             <canvas id="keywordValueMatrix"></canvas>
         </div>
         <div class="description-box">
-            <p>Here, we can see how often people search for these low competition keywords (in terms of total monthly searches).</p>
+            <p>This chart shows the cumulative search volume for keywords within different competition levels, providing insight into the volume potential of low-competition terms.</p>
         </div>
     </div>
 
@@ -112,17 +97,6 @@
     </div>
 
     <script>
-        // Smooth scrolling effects
-        document.addEventListener('scroll', function() {
-            const chartContainers = document.querySelectorAll('.chart-container');
-            chartContainers.forEach(container => {
-                if (container.getBoundingClientRect().top < window.innerHeight) {
-                    container.classList.add('animate-visible');
-                }
-            });
-            document.body.classList.add('scrolled');
-        });
-
         // Data for Distribution of Competition
         const competitionDistributionData = {
             labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
@@ -135,33 +109,33 @@
             }]
         };
 
-        // Data for Keyword Value Matrix
-        const keywordValueMatrixData = {
+        // Data for Cumulative Monthly Searches by Competition
+        const cumulativeSearchData = {
+            labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
             datasets: [{
-                label: 'Keywords',
-                data: [
-                    { x: 25, y: 500 },
-                    { x: 12, y: 500 },
-                    { x: 21, y: 500 },
-                    { x: 22, y: 5000 },
-                    { x: 43, y: 500 },
-                ],
+                label: 'Cumulative Monthly Searches',
+                data: [10000, 20000, 15000, 25000, 30000, 10000, 5000, 2000, 1000, 500], // Replace with actual cumulative values
                 backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
             }]
         };
 
         // Data for Top 30 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
-                "keyword1", "keyword2", // Update with 30 keywords
+                "Keyword1", "Keyword2", "Keyword3", "Keyword4", "Keyword5", "Keyword6", "Keyword7", "Keyword8", "Keyword9", "Keyword10",
+                "Keyword11", "Keyword12", "Keyword13", "Keyword14", "Keyword15", "Keyword16", "Keyword17", "Keyword18", "Keyword19", "Keyword20",
+                "Keyword21", "Keyword22", "Keyword23", "Keyword24", "Keyword25", "Keyword26", "Keyword27", "Keyword28", "Keyword29", "Keyword30",
                 "Total"
             ],
             datasets: [{
                 label: 'Monthly Searches',
-                data: [500, 1000, // Update with search volumes
-                    10000 // Total volume
-                ],
-                backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)'],
+                data: [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 
+                       5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 
+                       10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000,
+                       200000], // Replace with actual values for each keyword
+                backgroundColor: ['rgba(255, 159, 64, 0.2)'],
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
             }]
@@ -171,8 +145,7 @@
         const competitionRangeData = {
             labels: ["0-25", "26-50", "51-75", "76-100"],
             datasets: [{
-                label: 'Total Monthly Searches',
-                data: [10000, 20000, 15000, 5000], // Placeholder, update with actual values
+                data: [60000, 30000, 15000, 5000], // Placeholder, replace with actual values
                 backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
                 borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
                 borderWidth: 1
@@ -199,19 +172,19 @@
         });
 
         new Chart(document.getElementById('keywordValueMatrix'), {
-            type: 'scatter',
-            data: keywordValueMatrixData,
+            type: 'bar',
+            data: cumulativeSearchData,
             options: {
                 responsive: true,
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Keyword Value Matrix: Monthly Searches vs Competition'
+                        text: 'Cumulative Monthly Searches vs Competition'
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: 'Competition (out of 100)' } },
-                    y: { title: { display: true, text: 'Monthly Searches', beginAtZero: true } }
+                    x: { title: { display: true, text: '                    Competition Score (out of 100)' } },
+                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
                 }
             }
         });
@@ -221,11 +194,15 @@
             data: topLowCompKeywordsData,
             options: {
                 responsive: true,
-                indexAxis: 'y',
+                indexAxis: 'y', // Horizontal bars for easier reading
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Top Low-Competition Keywords by Search Volume'                    }
+                        text: 'Top 30 Low-Competition Keywords by Search Volume'
+                    },
+                    legend: {
+                        display: false // Remove legend for clarity
+                    }
                 },
                 scales: {
                     x: { title: { display: true, text: 'Monthly Searches' } },
@@ -243,6 +220,9 @@
                     title: {
                         display: true,
                         text: 'Total Monthly Searches by Competition Range'
+                    },
+                    legend: {
+                        display: false // Remove the legend key from this chart
                     }
                 },
                 scales: {
