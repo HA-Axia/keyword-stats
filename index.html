@@ -40,6 +40,8 @@
 
         .chart-box {
             flex: 2;
+            display: flex;
+            justify-content: center; /* Center the chart within its box */
         }
 
         .description-box {
@@ -50,6 +52,7 @@
         }
 
         .large-chart {
+            width: 600px; /* Set a fixed width to prevent stretching */
             height: 1000px; /* Increased height for readability */
         }
     </style>
@@ -188,8 +191,7 @@
                     }
                 },
                 scales: {
-                    x: { title                        : { display: true, text: 'Competition Score (out of 100)' } },
-                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
                 }
             }
         });
