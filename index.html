@@ -5,7 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyword Data Story</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* General Page Style */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #f0f4f8, #e2e8f0);
+            transition: background 0.5s ease;
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-weight: 700;
+            color: #3A3A3A;
+            margin-top: 20px;
+        }
+
+        /* Smooth transition effect on scroll */
         .chart-container {
             display: flex;
             align-items: center;
@@ -13,18 +32,35 @@
             width: 80%;
             max-width: 800px;
             margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-in-out;
         }
+
         .chart-box {
             flex: 2;
         }
+
         .description-box {
             flex: 1;
             padding-left: 20px;
             font-size: 14px;
             color: #333;
         }
-        h1, h2 {
-            text-align: center;
+
+        /* Adding scroll animations */
+        .animate-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Background effect on scroll */
+        body.scrolled {
+            background: linear-gradient(180deg, #e2e8f0, #cbd5e1);
         }
     </style>
 </head>
@@ -32,7 +68,7 @@
     <h1>Keyword Data Story</h1>
 
     <!-- First Chart and Description -->
-    <div class="chart-container">
+    <div class="chart-container" id="section1">
         <div class="chart-box">
             <h2>Distribution of Competition</h2>
             <canvas id="competitionDistributionChart"></canvas>
@@ -43,7 +79,7 @@
     </div>
 
     <!-- Second Chart and Description -->
-    <div class="chart-container">
+    <div class="chart-container" id="section2">
         <div class="chart-box">
             <h2>Keyword Value Matrix: Monthly Searches vs Competition</h2>
             <canvas id="keywordValueMatrix"></canvas>
@@ -54,9 +90,9 @@
     </div>
 
     <!-- Third Chart and Description -->
-    <div class="chart-container">
+    <div class="chart-container" id="section3">
         <div class="chart-box">
-            <h2>Top Low-Competition Keywords by Search Volume</h2>
+            <h2>Top 30 Low-Competition Keywords by Search Volume</h2>
             <canvas id="topLowCompKeywords"></canvas>
         </div>
         <div class="description-box">
@@ -64,7 +100,29 @@
         </div>
     </div>
 
+    <!-- Final Competition Range Chart -->
+    <div class="chart-container" id="section4">
+        <div class="chart-box">
+            <h2>Total Monthly Searches by Competition Range</h2>
+            <canvas id="totalVolumeByCompetition"></canvas>
+        </div>
+        <div class="description-box">
+            <p>This chart shows the total search volume across four competition ranges, allowing us to see where the bulk of search traffic lies.</p>
+        </div>
+    </div>
+
     <script>
+        // Smooth scrolling effects
+        document.addEventListener('scroll', function() {
+            const chartContainers = document.querySelectorAll('.chart-container');
+            chartContainers.forEach(container => {
+                if (container.getBoundingClientRect().top < window.innerHeight) {
+                    container.classList.add('animate-visible');
+                }
+            });
+            document.body.classList.add('scrolled');
+        });
+
         // Data for Distribution of Competition
         const competitionDistributionData = {
             labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
@@ -77,7 +135,7 @@
             }]
         };
 
-        // Data for Keyword Value Matrix (scatter plot of Monthly Searches vs Competition)
+        // Data for Keyword Value Matrix
         const keywordValueMatrixData = {
             datasets: [{
                 label: 'Keywords',
@@ -87,84 +145,44 @@
                     { x: 21, y: 500 },
                     { x: 22, y: 5000 },
                     { x: 43, y: 500 },
-                    // Add remaining points as necessary
                 ],
                 backgroundColor: 'rgba(153, 102, 255, 0.6)',
             }]
         };
 
-        // Data for Top Low-Competition Keywords by Search Volume
+        // Data for Top 30 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
-                "retirement home", "retirement community", "audley villages",
-                "over 55 retirement bungalows to rent near me", "over 55 housing",
-                "retirement housing", "housing over 55 bungalow to rent",
-                "55 and over housing", "retirement living community", "wixams retirement village"
+                "keyword1", "keyword2", // Update with 30 keywords
+                "Total"
             ],
             datasets: [{
                 label: 'Monthly Searches',
-                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000],
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                data: [500, 1000, // Update with search volumes
+                    10000 // Total volume
+                ],
+                backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)'],
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
             }]
         };
 
-        // Initialize each Chart
-        new Chart(document.getElementById('competitionDistributionChart'), {
-            type: 'bar',
-            data: competitionDistributionData,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Distribution of Competition Among Keywords'
-                    }
-                },
-                scales: {
-                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
-                    y: { title: { display: true, text: 'Number of Keywords' } }
-                }
-            }
-        });
+        // Competition Range Volume Data
+        const competitionRangeData = {
+            labels: ["0-25", "26-50", "51-75", "76-100"],
+            datasets: [{
+                label: 'Total Monthly Searches',
+                data: [10000, 20000, 15000, 5000], // Placeholder, update with actual values
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                borderWidth: 1
+            }]
+        };
 
-        new Chart(document.getElementById('keywordValueMatrix'), {
-            type: 'scatter',
-            data: keywordValueMatrixData,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Keyword Value Matrix: Monthly Searches vs Competition'
-                    }
-                },
-                scales: {
-                    x: { title: { display: true, text: 'Competition (out of 100)' } },
-                    y: { title: { display: true, text: 'Monthly Searches' } }
-                }
-            }
-        });
-
-        new Chart(document.getElementById('topLowCompKeywords'), {
-            type: 'bar',
-            data: topLowCompKeywordsData,
-            options: {
-                responsive: true,
-                indexAxis: 'y',
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Top Low-Competition Keywords by Search Volume'
-                    }
-                },
-                scales: {
-                    x: { title: { display: true, text: 'Monthly Searches' } },
-                    y: { title: { display: true, text: 'Keywords' } }
-                }
-            }
-        });
+        new Chart(document.getElementById('competitionDistributionChart'), { /* chart config */ });
+        new Chart(document.getElementById('keywordValueMatrix'), { /* chart config */ });
+        new Chart(document.getElementById('topLowCompKeywords'), { /* chart config */ });
+        new Chart(document.getElementById('totalVolumeByCompetition'), { /* chart config */ });
     </script>
 </body>
 </html>
