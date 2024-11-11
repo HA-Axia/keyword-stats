@@ -6,7 +6,6 @@
     <title>Keyword Data Story</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Style to center charts and align descriptions */
         .chart-container {
             display: flex;
             align-items: center;
@@ -66,27 +65,29 @@
     </div>
 
     <script>
-        // Data for Distribution of Competition (replace with updated data)
+        // Data for Distribution of Competition
         const competitionDistributionData = {
             labels: ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"],
             datasets: [{
                 label: 'Number of Keywords',
-                data: [10, 20, 15, 5, 8, 12, 7, 6, 2, 3], // Update based on new data
+                data: [76, 72, 68, 73, 74, 25, 11, 6, 3, 5],
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
         };
 
-        // Data for Keyword Value Matrix (replace with updated data)
+        // Data for Keyword Value Matrix (scatter plot of Monthly Searches vs Competition)
         const keywordValueMatrixData = {
             datasets: [{
                 label: 'Keywords',
                 data: [
-                    { x: 5, y: 100 },
-                    { x: 25, y: 200 },
-                    { x: 15, y: 300 },
-                    // Add additional points based on your dataset
+                    { x: 25, y: 500 },
+                    { x: 12, y: 500 },
+                    { x: 21, y: 500 },
+                    { x: 22, y: 5000 },
+                    { x: 43, y: 500 },
+                    // Add remaining points as necessary
                 ],
                 backgroundColor: 'rgba(153, 102, 255, 0.6)',
             }]
@@ -94,17 +95,22 @@
 
         // Data for Top Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
-            labels: ["Keyword 1", "Keyword 2", "Keyword 3"], // Update based on your top keywords
+            labels: [
+                "retirement home", "retirement community", "audley villages",
+                "over 55 retirement bungalows to rent near me", "over 55 housing",
+                "retirement housing", "housing over 55 bungalow to rent",
+                "55 and over housing", "retirement living community", "wixams retirement village"
+            ],
             datasets: [{
                 label: 'Monthly Searches',
-                data: [500, 400, 300], // Update with new search volumes
+                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000],
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
             }]
         };
 
-        // Initialize Distribution of Competition Chart with axis labels
+        // Initialize each Chart
         new Chart(document.getElementById('competitionDistributionChart'), {
             type: 'bar',
             data: competitionDistributionData,
@@ -123,7 +129,6 @@
             }
         });
 
-        // Initialize Keyword Value Matrix Chart with axis labels
         new Chart(document.getElementById('keywordValueMatrix'), {
             type: 'scatter',
             data: keywordValueMatrixData,
@@ -142,13 +147,12 @@
             }
         });
 
-        // Initialize Top Low-Competition Keywords Chart with keyword labels and axis title
         new Chart(document.getElementById('topLowCompKeywords'), {
             type: 'bar',
             data: topLowCompKeywordsData,
             options: {
                 responsive: true,
-                indexAxis: 'y', // Horizontal bars for easier reading
+                indexAxis: 'y',
                 plugins: {
                     title: {
                         display: true,
