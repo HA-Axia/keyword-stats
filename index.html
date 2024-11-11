@@ -29,7 +29,7 @@
             align-items: center;
             justify-content: center;
             width: 80%;
-            max-width: 800px;
+            max-width: 1000px; /* Increased max width for better readability */
             margin: 20px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
@@ -39,8 +39,7 @@
 
         .chart-box {
             flex: 2;
-            max-height: 400px; /* Set max height for container to enable vertical scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: 700px; /* Increased height for the third chart */
         }
 
         .description-box {
@@ -50,8 +49,8 @@
             color: #333;
         }
 
-        .scrollable-chart {
-            height: 1200px; /* Increase height for larger bars */
+        .large-chart {
+            height: 800px; /* Larger canvas height for readability */
         }
     </style>
 </head>
@@ -80,11 +79,11 @@
         </div>
     </div>
 
-    <!-- Third Chart and Description (Scrollable) -->
+    <!-- Third Chart and Description (Top 20 Keywords) -->
     <div class="chart-container" id="section3">
         <div class="chart-box">
-            <h2>Top 30 Low-Competition Keywords by Search Volume</h2>
-            <canvas id="topLowCompKeywords" class="scrollable-chart"></canvas>
+            <h2>Top 20 Low-Competition Keywords by Search Volume</h2>
+            <canvas id="topLowCompKeywords" class="large-chart"></canvas>
         </div>
         <div class="description-box">
             <p>Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</p>
@@ -127,7 +126,7 @@
             }]
         };
 
-        // Data for Top 30 Low-Competition Keywords by Search Volume
+        // Data for Top 20 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
                 "retirement home", "retirement community", "audley villages", "over 55 retirement bungalows to rent near me", 
@@ -135,17 +134,12 @@
                 "retirement living community", "wixams retirement village", "shenley wood retirement village", 
                 "hagley road retirement village", "longbridge retirement village", "new oscott village", 
                 "luxury nursing home", "wallacea living", "riverstone living", "retirement communities near me", 
-                "senior living communities", "senior retirement communities", "luxury assisted living", 
-                "over 55 retirement bungalows to rent", "over 55 apartments", "senior apartment living", 
-                "over 55 housing to rent near me", "senior community living", "over 55 housing near me", 
-                "average cost of nursing home", "adlington retirement living", "over 55 retirement bungalows", 
-                "Total"
+                "senior living communities", "Total"
             ],
             datasets: [{
                 label: 'Monthly Searches',
                 data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 
-                       500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 
-                       200000], // Actual values from the dataset
+                       500, 500, 500, 500, 500, 200000], // Reduced to top 20 keywords
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
@@ -171,7 +165,8 @@
                 responsive: true,
                 plugins: {
                     title: {
-                        display: true,                        text: 'Distribution of Competition Among Keywords'
+                        display: true,
+                        text: 'Distribution of Competition Among Keywords'
                     }
                 },
                 scales: {
@@ -198,7 +193,6 @@
                 }
             }
         });
-
         new Chart(document.getElementById('topLowCompKeywords'), {
             type: 'bar',
             data: topLowCompKeywordsData,
@@ -208,7 +202,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Top 30 Low-Competition Keywords by Search Volume'
+                        text: 'Top 20 Low-Competition Keywords by Search Volume'
                     },
                     legend: {
                         display: false // Hide the legend for this chart
