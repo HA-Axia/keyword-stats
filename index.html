@@ -29,7 +29,7 @@
             align-items: center;
             justify-content: center;
             width: 80%;
-            max-width: 1000px; /* Increased max width for better readability */
+            max-width: 900px; /* Set max width to prevent it from stretching too wide */
             margin: 20px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
@@ -39,7 +39,6 @@
 
         .chart-box {
             flex: 2;
-            max-height: 700px; /* Increased height for the third chart */
         }
 
         .description-box {
@@ -50,7 +49,7 @@
         }
 
         .large-chart {
-            height: 800px; /* Larger canvas height for readability */
+            height: 1000px; /* Increase height for better readability */
         }
     </style>
 </head>
@@ -189,10 +188,11 @@
                 },
                 scales: {
                     x: { title: { display: true, text: 'Competition Score (out of 100)' } },
-                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
+                    y: { title: { display: true, text:                        Cumulative Monthly Searches' }, beginAtZero: true }
                 }
             }
         });
+
         new Chart(document.getElementById('topLowCompKeywords'), {
             type: 'bar',
             data: topLowCompKeywordsData,
