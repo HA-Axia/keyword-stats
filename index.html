@@ -39,8 +39,8 @@
 
         .chart-box {
             flex: 2;
-            overflow-y: auto; /* Enable vertical scrolling for the chart */
-            max-height: 400px; /* Set a maximum height for vertical scroll */
+            max-height: 400px; /* Set max height for container to enable vertical scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         .description-box {
@@ -51,7 +51,7 @@
         }
 
         .scrollable-chart {
-            height: 1500px; /* Increase height to display bars with enough space */
+            height: 1200px; /* Increase height for larger bars */
         }
     </style>
 </head>
@@ -171,12 +171,11 @@
                 responsive: true,
                 plugins: {
                     title: {
-                        display: true,
-                        text: 'Distribution of Competition Among Keywords'
+                        display: true,                        text: 'Distribution of Competition Among Keywords'
                     }
                 },
                 scales: {
-                    x: { title                        : { display: true, text: 'Competition Score (out of 100)' } },
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
                     y: { title: { display: true, text: 'Number of Keywords' } }
                 }
             }
