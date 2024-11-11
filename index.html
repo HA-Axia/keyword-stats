@@ -39,7 +39,8 @@
 
         .chart-box {
             flex: 2;
-            overflow-x: auto; /* Enable horizontal scrolling for the chart */
+            overflow-y: auto; /* Enable vertical scrolling for the chart */
+            max-height: 400px; /* Set a maximum height for vertical scroll */
         }
 
         .description-box {
@@ -50,7 +51,7 @@
         }
 
         .scrollable-chart {
-            width: 2000px; /* Increase width for better readability and scrolling */
+            height: 1500px; /* Increase height to display bars with enough space */
         }
     </style>
 </head>
@@ -79,7 +80,7 @@
         </div>
     </div>
 
-    <!-- Third Chart and Description -->
+    <!-- Third Chart and Description (Scrollable) -->
     <div class="chart-container" id="section3">
         <div class="chart-box">
             <h2>Top 30 Low-Competition Keywords by Search Volume</h2>
@@ -129,20 +130,22 @@
         // Data for Top 30 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
-                "actualKeyword1", "actualKeyword2", "actualKeyword3", "actualKeyword4", "actualKeyword5", 
-                "actualKeyword6", "actualKeyword7", "actualKeyword8", "actualKeyword9", "actualKeyword10",
-                "actualKeyword11", "actualKeyword12", "actualKeyword13", "actualKeyword14", "actualKeyword15", 
-                "actualKeyword16", "actualKeyword17", "actualKeyword18", "actualKeyword19", "actualKeyword20",
-                "actualKeyword21", "actualKeyword22", "actualKeyword23", "actualKeyword24", "actualKeyword25", 
-                "actualKeyword26", "actualKeyword27", "actualKeyword28", "actualKeyword29", "actualKeyword30",
+                "retirement home", "retirement community", "audley villages", "over 55 retirement bungalows to rent near me", 
+                "over 55 housing", "retirement housing", "housing over 55 bungalow to rent", "55 and over housing", 
+                "retirement living community", "wixams retirement village", "shenley wood retirement village", 
+                "hagley road retirement village", "longbridge retirement village", "new oscott village", 
+                "luxury nursing home", "wallacea living", "riverstone living", "retirement communities near me", 
+                "senior living communities", "senior retirement communities", "luxury assisted living", 
+                "over 55 retirement bungalows to rent", "over 55 apartments", "senior apartment living", 
+                "over 55 housing to rent near me", "senior community living", "over 55 housing near me", 
+                "average cost of nursing home", "adlington retirement living", "over 55 retirement bungalows", 
                 "Total"
             ],
             datasets: [{
                 label: 'Monthly Searches',
-                data: [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 
-                       5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 
-                       10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000,
-                       200000], // Replace with actual values for each keyword
+                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 
+                       500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 
+                       200000], // Actual values from the dataset
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
@@ -153,7 +156,7 @@
         const competitionRangeData = {
             labels: ["0-25", "26-50", "51-75", "76-100"],
             datasets: [{
-                data: [60000, 30000, 15000, 5000], // Placeholder, replace with actual values
+                data: [80200, 98600, 4300, 450], // Cumulative volumes from each competition range
                 backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
                 borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
                 borderWidth: 1
@@ -173,7 +176,7 @@
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: 'Competition Score (out of 100)' }                    },
+                    x: { title                        : { display: true, text: 'Competition Score (out of 100)' } },
                     y: { title: { display: true, text: 'Number of Keywords' } }
                 }
             }
@@ -230,7 +233,7 @@
                         text: 'Total Monthly Searches by Competition Range'
                     },
                     legend: {
-                        display: false // Remove legend for clarity
+                        display: false // Remove the legend key from this chart
                     }
                 },
                 scales: {
