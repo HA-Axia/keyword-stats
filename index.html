@@ -39,6 +39,7 @@
 
         .chart-box {
             flex: 2;
+            overflow-x: auto; /* Enable horizontal scrolling for the chart */
         }
 
         .description-box {
@@ -46,6 +47,10 @@
             padding-left: 20px;
             font-size: 14px;
             color: #333;
+        }
+
+        .scrollable-chart {
+            width: 1500px; /* Increase width for better readability and scrolling */
         }
     </style>
 </head>
@@ -78,7 +83,7 @@
     <div class="chart-container" id="section3">
         <div class="chart-box">
             <h2>Top 30 Low-Competition Keywords by Search Volume</h2>
-            <canvas id="topLowCompKeywords"></canvas>
+            <canvas id="topLowCompKeywords" class="scrollable-chart"></canvas>
         </div>
         <div class="description-box">
             <p>Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</p>
@@ -135,7 +140,7 @@
                        5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 
                        10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000,
                        200000], // Replace with actual values for each keyword
-                backgroundColor: ['rgba(255, 159, 64, 0.2)'],
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 borderColor: 'rgba(255, 159, 64, 1)',
                 borderWidth: 1
             }]
@@ -179,11 +184,11 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Cumulative Monthly Searches vs Competition'
+                        text: '                        Cumulative Monthly Searches vs Competition'
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: '                    Competition Score (out of 100)' } },
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
                     y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
                 }
             }
