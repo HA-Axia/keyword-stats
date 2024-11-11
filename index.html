@@ -5,24 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyword Data Story</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Style to center charts and align descriptions */
+        .chart-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .chart-box {
+            flex: 2;
+        }
+        .description-box {
+            flex: 1;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>Keyword Data Story</h1>
 
-    <!-- Chart Containers -->
-    <div>
-        <h2>Distribution of Competition</h2>
-        <canvas id="competitionDistributionChart"></canvas>
+    <!-- First Chart and Description -->
+    <div class="chart-container">
+        <div class="chart-box">
+            <h2>Distribution of Competition</h2>
+            <canvas id="competitionDistributionChart"></canvas>
+        </div>
+        <div class="description-box">
+            <p>Here, we can see how many of our keywords are 'low competition'. Low competition keywords (bars toward the left of the chart) are terms that people search for, but which companies are not advertising for.</p>
+        </div>
     </div>
 
-    <div>
-        <h2>Keyword Value Matrix: Monthly Searches vs Competition</h2>
-        <canvas id="keywordValueMatrix"></canvas>
+    <!-- Second Chart and Description -->
+    <div class="chart-container">
+        <div class="chart-box">
+            <h2>Keyword Value Matrix: Monthly Searches vs Competition</h2>
+            <canvas id="keywordValueMatrix"></canvas>
+        </div>
+        <div class="description-box">
+            <p>Here, we can see how often people search for these low competition keywords (in terms of total monthly searches).</p>
+        </div>
     </div>
 
-    <div>
-        <h2>Top Low-Competition Keywords by Search Volume</h2>
-        <canvas id="topLowCompKeywords"></canvas>
+    <!-- Third Chart and Description -->
+    <div class="chart-container">
+        <div class="chart-box">
+            <h2>Top Low-Competition Keywords by Search Volume</h2>
+            <canvas id="topLowCompKeywords"></canvas>
+        </div>
+        <div class="description-box">
+            <p>Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</p>
+        </div>
     </div>
 
     <script>
@@ -64,23 +104,62 @@
             }]
         };
 
-        // Initialize each Chart
+        // Initialize Distribution of Competition Chart with axis labels
         new Chart(document.getElementById('competitionDistributionChart'), {
             type: 'bar',
             data: competitionDistributionData,
-            options: { responsive: true }
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Distribution of Competition Among Keywords'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
+                    y: { title: { display: true, text: 'Number of Keywords' } }
+                }
+            }
         });
 
+        // Initialize Keyword Value Matrix Chart with axis labels
         new Chart(document.getElementById('keywordValueMatrix'), {
             type: 'scatter',
             data: keywordValueMatrixData,
-            options: { responsive: true, scales: { x: { title: { display: true, text: 'Competition' }}, y: { title: { display: true, text: 'Monthly Searches' }}}}
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Keyword Value Matrix: Monthly Searches vs Competition'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Competition (out of 100)' } },
+                    y: { title: { display: true, text: 'Monthly Searches' } }
+                }
+            }
         });
 
+        // Initialize Top Low-Competition Keywords Chart with keyword labels and axis title
         new Chart(document.getElementById('topLowCompKeywords'), {
             type: 'bar',
             data: topLowCompKeywordsData,
-            options: { responsive: true, indexAxis: 'y' }
+            options: {
+                responsive: true,
+                indexAxis: 'y', // Horizontal bars for easier reading
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top Low-Competition Keywords by Search Volume'
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Monthly Searches' } },
+                    y: { title: { display: true, text: 'Keywords' } }
+                }
+            }
         });
     </script>
 </body>
