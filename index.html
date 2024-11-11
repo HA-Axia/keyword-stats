@@ -41,7 +41,7 @@
         .chart-box {
             flex: 2;
             display: flex;
-            justify-content: center; /* Center the chart within its box */
+            justify-content: center;
         }
 
         .description-box {
@@ -51,9 +51,16 @@
             color: #333;
         }
 
-        .large-chart {
-            width: 600px; /* Set a fixed width to prevent stretching */
-            height: 1000px; /* Increased height for readability */
+        /* Set consistent max dimensions for all charts */
+        canvas {
+            max-width: 600px;
+            max-height: 400px;
+        }
+
+        /* Specific adjustment for the third chart */
+        #topLowCompKeywords {
+            max-width: 600px;
+            max-height: 600px; /* Allow more height for readability */
         }
     </style>
 </head>
@@ -86,7 +93,7 @@
     <div class="chart-container" id="section3">
         <div class="chart-box">
             <h2>Top 20 Low-Competition Keywords by Search Volume</h2>
-            <canvas id="topLowCompKeywords" class="large-chart"></canvas>
+            <canvas id="topLowCompKeywords"></canvas>
         </div>
         <div class="description-box">
             <p>Here, we see a snapshot of some of the best keywords - terms that are searched often, but which companies are not advertising for.</p>
@@ -184,14 +191,14 @@
             data: cumulativeSearchData,
             options: {
                 responsive: true,
-                plugins: {
-                    title: {
+                plugins:                    title: {
                         display: true,
                         text: 'Cumulative Monthly Searches vs Competition'
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
+                    y: { title: { display: true, text: 'Cumulative Monthly Searches' }, beginAtZero: true }
                 }
             }
         });
