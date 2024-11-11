@@ -50,7 +50,7 @@
         }
 
         .scrollable-chart {
-            width: 1500px; /* Increase width for better readability and scrolling */
+            width: 2000px; /* Increase width for better readability and scrolling */
         }
     </style>
 </head>
@@ -129,9 +129,12 @@
         // Data for Top 30 Low-Competition Keywords by Search Volume
         const topLowCompKeywordsData = {
             labels: [
-                "Keyword1", "Keyword2", "Keyword3", "Keyword4", "Keyword5", "Keyword6", "Keyword7", "Keyword8", "Keyword9", "Keyword10",
-                "Keyword11", "Keyword12", "Keyword13", "Keyword14", "Keyword15", "Keyword16", "Keyword17", "Keyword18", "Keyword19", "Keyword20",
-                "Keyword21", "Keyword22", "Keyword23", "Keyword24", "Keyword25", "Keyword26", "Keyword27", "Keyword28", "Keyword29", "Keyword30",
+                "actualKeyword1", "actualKeyword2", "actualKeyword3", "actualKeyword4", "actualKeyword5", 
+                "actualKeyword6", "actualKeyword7", "actualKeyword8", "actualKeyword9", "actualKeyword10",
+                "actualKeyword11", "actualKeyword12", "actualKeyword13", "actualKeyword14", "actualKeyword15", 
+                "actualKeyword16", "actualKeyword17", "actualKeyword18", "actualKeyword19", "actualKeyword20",
+                "actualKeyword21", "actualKeyword22", "actualKeyword23", "actualKeyword24", "actualKeyword25", 
+                "actualKeyword26", "actualKeyword27", "actualKeyword28", "actualKeyword29", "actualKeyword30",
                 "Total"
             ],
             datasets: [{
@@ -170,7 +173,7 @@
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: 'Competition Score (out of 100)' } },
+                    x: { title: { display: true, text: 'Competition Score (out of 100)' }                    },
                     y: { title: { display: true, text: 'Number of Keywords' } }
                 }
             }
@@ -184,7 +187,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: '                        Cumulative Monthly Searches vs Competition'
+                        text: 'Cumulative Monthly Searches vs Competition'
                     }
                 },
                 scales: {
@@ -199,14 +202,14 @@
             data: topLowCompKeywordsData,
             options: {
                 responsive: true,
-                indexAxis: 'y', // Horizontal bars for easier reading
+                indexAxis: 'y', // Horizontal bars for better readability
                 plugins: {
                     title: {
                         display: true,
                         text: 'Top 30 Low-Competition Keywords by Search Volume'
                     },
                     legend: {
-                        display: false // Remove legend for clarity
+                        display: false // Hide the legend for this chart
                     }
                 },
                 scales: {
@@ -227,7 +230,7 @@
                         text: 'Total Monthly Searches by Competition Range'
                     },
                     legend: {
-                        display: false // Remove the legend key from this chart
+                        display: false // Remove legend for clarity
                     }
                 },
                 scales: {
